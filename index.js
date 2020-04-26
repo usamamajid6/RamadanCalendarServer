@@ -146,7 +146,10 @@ app.get("/getImage/:city", (req, res) => {
         }
         genrateImage(data, req.params.city, (response) => {
           if(response){
-            res.status(200).download('./image.png',`${req.params.city.trim()}.png`);
+            res.json({
+              data:"hjhj"
+            })
+            // res.status(200).download('./image.png',`${req.params.city.trim()}.png`);
           }else{
             res.status(204).json({
               status: "Failed",
