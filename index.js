@@ -102,7 +102,9 @@ ${tableString}</body>
 };
 
 app.use(cors());
-app.get("/", (req, res) => res.send("AoA\nServer is UP and running!"));
+app.get("/", (req, res) =>
+  res.send("AoA\nServer is UP and running!\nAt 27 April 2020 At 2:10PM")
+);
 app.get("/getTimings/:city", (req, res) => {
   axios({
     method: "get",
