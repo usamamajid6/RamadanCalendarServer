@@ -6,6 +6,9 @@ const key = require("./MuslimSalatAPIKey");
 const cors = require("cors");
 const nodeHtmlToImage = require("node-html-to-image");
 const dateFormat = require("dateformat");
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 const genrateImage = (data, city_name, cb) => {
   const styles = `
   body{
@@ -99,7 +102,7 @@ ${tableString}</body>
 };
 
 app.use(cors());
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", (req, res) => res.send("AoA\nServer is UP and running!"));
 app.get("/getTimings/:city", (req, res) => {
   axios({
     method: "get",
@@ -145,19 +148,17 @@ app.get("/getImage/:city", (req, res) => {
           element.roza = i + 1;
         }
         genrateImage(data, req.params.city, (response) => {
-          if(response){
+          if (response) {
             res.json({
-              data:"hjhj"
-            })
+              data: "hjhj",
+            });
             // res.status(200).download('./image.png',`${req.params.city.trim()}.png`);
-          }else{
+          } else {
             res.status(204).json({
               status: "Failed",
             });
           }
         });
-
-        
       }
     })
     .catch((error) => {
