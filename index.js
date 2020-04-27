@@ -108,6 +108,25 @@ app.get("/getTimings/:city", (req, res) => {
     method: "get",
     url: `https://muslimsalat.com/${req.params.city}/yearly/25-04-2020.json?key=${key}`,
   })
+    // .then((response) => {
+    //   if (response.data.status_description === "Failed.") {
+    //     res.status(204).json({
+    //       response: response.data,
+    //       status: "Error in Search String",
+    //     });
+    //   } else {
+    //     res.status(200).json({
+    //       response: response.data,
+    //       status: "Success",
+    //     });
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    //   res.status(503).json({
+    //     error,
+    //   });
+    // });
     .then((response) => {
       if (response.data.status_description === "Failed.") {
         res.status(204).json({
@@ -115,9 +134,23 @@ app.get("/getTimings/:city", (req, res) => {
           status: "Error in Search String",
         });
       } else {
-        res.status(200).json({
-          response: response.data,
-          status: "Success",
+        let data = response.data.items;
+        data.splice(30, data.length);
+        for (let i = 0; i < data.length; i++) {
+          const element = data[i];
+          element.roza = i + 1;
+        }
+        genrateImage(data, req.params.city, (response) => {
+          if (response) {
+            res.json({
+              data: "hjhj",
+            });
+            // res.status(200).download('./image.png',`${req.params.city.trim()}.png`);
+          } else {
+            res.status(204).json({
+              status: "Failed",
+            });
+          }
         });
       }
     })
