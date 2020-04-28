@@ -103,32 +103,13 @@ ${tableString}</body>
 
 app.use(cors());
 app.get("/", (req, res) =>
-  res.send("AoA\nServer is UP and running!\nAt 27 April 2020 At 2:10PM")
+  res.send("AoA\nServer is UP and running!\nLast Commit At 29 April 2020 At 3:42PM")
 );
 app.get("/getTimings/:city", (req, res) => {
   axios({
     method: "get",
     url: `https://muslimsalat.com/${req.params.city}/yearly/25-04-2020.json?key=${key}`,
   })
-    // .then((response) => {
-    //   if (response.data.status_description === "Failed.") {
-    //     res.status(204).json({
-    //       response: response.data,
-    //       status: "Error in Search String",
-    //     });
-    //   } else {
-    //     res.status(200).json({
-    //       response: response.data,
-    //       status: "Success",
-    //     });
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    //   res.status(503).json({
-    //     error,
-    //   });
-    // });
     .then((response) => {
       if (response.data.status_description === "Failed.") {
         res.status(204).json({
@@ -136,23 +117,9 @@ app.get("/getTimings/:city", (req, res) => {
           status: "Error in Search String",
         });
       } else {
-        let data = response.data.items;
-        data.splice(30, data.length);
-        for (let i = 0; i < data.length; i++) {
-          const element = data[i];
-          element.roza = i + 1;
-        }
-        genrateImage(data, req.params.city, (response) => {
-          if (response) {
-            res.json({
-              data: "hjhj",
-            });
-            // res.status(200).download('./image.png',`${req.params.city.trim()}.png`);
-          } else {
-            res.status(204).json({
-              status: "Failed",
-            });
-          }
+        res.status(200).json({
+          response: response.data,
+          status: "Success",
         });
       }
     })
@@ -162,6 +129,43 @@ app.get("/getTimings/:city", (req, res) => {
         error,
       });
     });
+  // .then((response) => {
+  //   if (response.data.status_description === "Failed.") {
+  //     res.status(204).json({
+  //       response: response.data,
+  //       status: "Error in Search String",
+  //     });
+  //   } else {
+  //     let data = response.data.items;
+  //     data.splice(30, data.length);
+  //     for (let i = 0; i < data.length; i++) {
+  //       const element = data[i];
+  //       element.roza = i + 1;
+  //     }
+
+  //     // genrateImage(data, req.params.city, (response) => {
+  //     //   if (response) {
+  //     //     res.json({
+  //     //       data: "hjhj",
+  //     //     });
+  //     //     // res.status(200).download('./image.png',`${req.params.city.trim()}.png`);
+  //     //   } else {
+  //     //     res.status(204).json({
+  //     //       status: "Failed",
+  //     //     });
+  //     //   }
+  //     // });
+
+  //   res.json({data:"Working!"})
+
+  //   }
+  // })
+  // .catch((error) => {
+  //   console.log(error);
+  //   res.status(503).json({
+  //     error,
+  //   });
+  // });
 });
 
 app.get("/getImage/:city", (req, res) => {
@@ -182,17 +186,20 @@ app.get("/getImage/:city", (req, res) => {
           const element = data[i];
           element.roza = i + 1;
         }
-        genrateImage(data, req.params.city, (response) => {
-          if (response) {
-            res.json({
-              data: "hjhj",
-            });
-            // res.status(200).download('./image.png',`${req.params.city.trim()}.png`);
-          } else {
-            res.status(204).json({
-              status: "Failed",
-            });
-          }
+        // genrateImage(data, req.params.city, (response) => {
+        //   if (response) {
+        //     res.json({
+        //       data: "hjhj",
+        //     });
+        //     // res.status(200).download('./image.png',`${req.params.city.trim()}.png`);
+        //   } else {
+        //     res.status(204).json({
+        //       status: "Failed",
+        //     });
+        //   }
+        // });
+        res.json({
+          data: "hjhj",
         });
       }
     })
