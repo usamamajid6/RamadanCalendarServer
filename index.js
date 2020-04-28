@@ -103,7 +103,9 @@ ${tableString}</body>
 
 app.use(cors());
 app.get("/", (req, res) =>
-  res.send("AoA\nServer is UP and running!\nLast Commit At 29 April 2020 At 3:42PM")
+  res.send(
+    "AoA\nServer is UP and running!\nLast Commit At 29 April 2020 At 3:42PM"
+  )
 );
 app.get("/getTimings/:city", (req, res) => {
   axios({
@@ -198,9 +200,9 @@ app.get("/getImage/:city", (req, res) => {
         //     });
         //   }
         // });
-        res.json({
-          data: "hjhj",
-        });
+        res
+          .status(200)
+          .download("./image.png", `${req.params.city.trim()}.png`);
       }
     })
     .catch((error) => {
