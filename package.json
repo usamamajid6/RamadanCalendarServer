@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "imagegenerator": "0.0.41",
     "node-html-to-image": "^1.2.0",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "puppeteer": "^3.0.2"
   }
 }
