@@ -91,7 +91,9 @@ const genrateImage = (data, city_name, cb) => {
 </div>
 ${tableString}</body>
 </html>`;
-
+  console.log("-------------------------------------");
+  console.log("nodeHtmlToImage is about to call");
+  console.log("-------------------------------------");
   nodeHtmlToImage({
     output: "./image.png",
     html: completeHTML,
@@ -110,7 +112,7 @@ ${tableString}</body>
 app.use(cors());
 app.get("/", (req, res) =>
   res.send(
-    "AoA\nServer is UP and running!\nLast Commit At 29 April 2020 At 12:19 PM"
+    "AoA\nServer is UP and running!\nLast Commit At 29 April 2020 At 12:33 PM"
   )
 );
 app.get("/getTimings/:city", (req, res) => {
