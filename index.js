@@ -10,6 +10,9 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 const genrateImage = (data, city_name, cb) => {
+  console.log("-------------------------------------");
+  console.log("Genrate Image Calls");
+  console.log("-------------------------------------");
   const styles = `
   body{
     text-align:center;
@@ -94,6 +97,9 @@ ${tableString}</body>
     html: completeHTML,
   })
     .then(() => {
+      console.log("-------------------------------------");
+      console.log("Image Created Successfully");
+      console.log("-------------------------------------");
       cb(true);
     })
     .catch(() => {
@@ -104,7 +110,7 @@ ${tableString}</body>
 app.use(cors());
 app.get("/", (req, res) =>
   res.send(
-    "AoA\nServer is UP and running!\nLast Commit At 29 April 2020 At 04:08 AM"
+    "AoA\nServer is UP and running!\nLast Commit At 29 April 2020 At 12:19 PM"
   )
 );
 app.get("/getTimings/:city", (req, res) => {
@@ -170,6 +176,10 @@ app.get("/getTimings/:city", (req, res) => {
   // });
 });
 
+// app.get('/exportAsImage/:city',(req,res)=>{
+
+// })
+
 app.get("/getImage/:city", (req, res) => {
   axios({
     method: "get",
@@ -188,21 +198,23 @@ app.get("/getImage/:city", (req, res) => {
           const element = data[i];
           element.roza = i + 1;
         }
-        // genrateImage(data, req.params.city, (response) => {
-        //   if (response) {
-        //     res.json({
-        //       data: "hjhj",
-        //     });
-        //     // res.status(200).download('./image.png',`${req.params.city.trim()}.png`);
-        //   } else {
-        //     res.status(204).json({
-        //       status: "Failed",
-        //     });
-        //   }
-        // });
-        res
-          .status(200)
-          .download("./image.png", `${req.params.city.trim()}.png`);
+        genrateImage(data, req.params.city, (response) => {
+          if (response) {
+            console.log("-------------------------------------");
+            console.log("After Genrate Image response");
+            console.log("-------------------------------------");
+            res
+              .status(200)
+              .download("./image.png", `${req.params.city.trim()}.png`);
+          } else {
+            res.status(204).json({
+              status: "Failed",
+            });
+          }
+        });
+        //   res
+        //     .status(200)
+        //     .download("./image.png", `${req.params.city.trim()}.png`);
       }
     })
     .catch((error) => {
