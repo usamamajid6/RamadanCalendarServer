@@ -118,7 +118,7 @@ ${tableString}</body>
 app.use(cors());
 app.get("/", (req, res) =>
   res.send(
-    "AoA\nServer is UP and running!\nLast Commit At 30 April 2020 At 8:03 PM"
+    "AoA\nServer is UP and running!\nLast Commit At 30 April 2020 At 10:30 PM"
   )
 );
 app.get("/getTimings/:city", (req, res) => {
