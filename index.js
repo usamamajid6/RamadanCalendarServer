@@ -126,7 +126,7 @@ ${tableString}</body>
 app.use(cors());
 app.get("/", (req, res) =>
   res.send(
-    "AoA\nServer is UP and running!\nLast Commit At 30 April 2020 At 10:53 PM"
+    "AoA\nServer is UP and running!\nLast Commit At 30 April 2020 At 11:03 PM"
   )
 );
 app.get("/getTimings/:city", (req, res) => {
@@ -221,7 +221,7 @@ app.get("/getImage/:city", (req, res) => {
             console.log("-------------------------------------");
             res
               .status(200)
-              .download("./image.png", `${req.params.city.trim()}.png`);
+              .download("./image.png", `${req.params.city.trim()}-RAMADAN-CALENDAR-2020.png`);
           } else {
             res.status(204).json({
               status: "Failed",
@@ -241,48 +241,7 @@ app.get("/getImage/:city", (req, res) => {
     });
 });
 
-app.get("/test/:city", (req, res) => {
-  axios({
-    method: "get",
-    url: `https://muslimsalat.com/${req.params.city}/yearly/25-04-2020.json?key=${key}`,
-  })
-    .then((response) => {
-      if (response.data.status_description === "Failed.") {
-        res.status(204).json({
-          response: response.data,
-          status: "Error in Search String",
-        });
-      } else {
-        let data = response.data.items;
-        data.splice(30, data.length);
-        for (let i = 0; i < data.length; i++) {
-          const element = data[i];
-          element.roza = i + 1;
-        }
-        genrateImage(data, req.params.city, (response) => {
-          if (response) {
-            console.log("-------------------------------------");
-            console.log("After Genrate Image response");
-            console.log("-------------------------------------");
-            res
-              .status(200)
-              .download("./image.png", `${req.params.city.trim()}.png`);
-          } else {
-            res.status(200).download("./index.js");
-          }
-        });
-        //   res
-        //     .status(200)
-        //     .download("./image.png", `${req.params.city.trim()}.png`);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(503).json({
-        error,
-      });
-    });
-});
+
 
 app.get("/getTimings/Shafi/:city", (req, res) => {
   axios({
