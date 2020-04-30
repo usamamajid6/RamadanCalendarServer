@@ -6,6 +6,8 @@ const key = require("./MuslimSalatAPIKey");
 const cors = require("cors");
 const nodeHtmlToImage = require("node-html-to-image");
 const dateFormat = require("dateformat");
+const puppeteer = require('puppeteer');
+puppeteer.launch({ args: ['--no-sandbox'] });
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
@@ -97,6 +99,7 @@ ${tableString}</body>
   nodeHtmlToImage({
     output: "./image.png",
     html: completeHTML,
+    // content: { name: "you" },
   })
     .then(() => {
       console.log("-------------------------------------");
@@ -105,6 +108,9 @@ ${tableString}</body>
       cb(true);
     })
     .catch(() => {
+      console.log("-------------------------------------");
+      console.log("Image Creation Problem Occur!");
+      console.log("-------------------------------------");
       cb(false);
     });
 };
@@ -112,7 +118,7 @@ ${tableString}</body>
 app.use(cors());
 app.get("/", (req, res) =>
   res.send(
-    "AoA\nServer is UP and running!\nLast Commit At 29 April 2020 At 6:30 PM"
+    "AoA\nServer is UP and running!\nLast Commit At 30 April 2020 At 8:03 PM"
   )
 );
 app.get("/getTimings/:city", (req, res) => {
