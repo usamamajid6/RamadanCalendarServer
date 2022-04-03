@@ -88,7 +88,7 @@ const genrateImage = (data, city_name, cb) => {
 </head>
 <body>
 <div class="headContainer">
-<h1>RAMADAN CALENDAR 2020</h1>
+<h1>RAMADAN CALENDAR 2022</h1>
 <h3>${city_name.toUpperCase()}</h3>
 </div>
 ${tableString}</body>
@@ -132,7 +132,7 @@ app.get("/", (req, res) =>
 app.get("/getTimings/:city", (req, res) => {
   axios({
     method: "get",
-    url: `https://muslimsalat.com/${req.params.city}/yearly/25-04-2020.json?key=${key}`,
+    url: `https://muslimsalat.com/${req.params.city}/yearly/03-04-2022.json?key=${key}`,
   })
     .then((response) => {
       if (response.data.status_description === "Failed.") {
@@ -199,7 +199,7 @@ app.get("/getTimings/:city", (req, res) => {
 app.get("/getImage/:city", (req, res) => {
   axios({
     method: "get",
-    url: `https://muslimsalat.com/${req.params.city}/yearly/25-04-2020.json?key=${key}`,
+    url: `https://muslimsalat.com/${req.params.city}/yearly/03-04-2022.json?key=${key}`,
   })
     .then((response) => {
       if (response.data.status_description === "Failed.") {
@@ -221,7 +221,7 @@ app.get("/getImage/:city", (req, res) => {
             console.log("-------------------------------------");
             res
               .status(200)
-              .download("./image.png", `${req.params.city.trim()}-RAMADAN-CALENDAR-2020.png`);
+              .download("./image.png", `${req.params.city.trim()}-RAMADAN-CALENDAR-2022.png`);
           } else {
             res.status(204).json({
               status: "Failed",
@@ -246,7 +246,7 @@ app.get("/getImage/:city", (req, res) => {
 app.get("/getTimings/Shafi/:city", (req, res) => {
   axios({
     method: "get",
-    url: `https://muslimsalat.com/${req.params.city}/yearly/24-04-2020/2.json?key=${key}`,
+    url: `https://muslimsalat.com/${req.params.city}/yearly/03-04-2022.json?key=${key}`,
   })
     .then((response) => {
       if (response.data.status_description === "Failed.") {
