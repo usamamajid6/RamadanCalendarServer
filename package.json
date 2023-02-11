@@ -18,7 +18,7 @@
     "handlebars": "^4.7.6",
     "imagegenerator": "0.0.41",
     "node-html-to-image": "^1.2.0",
-    "nodemon": "^2.0.3",
+    "nodemon": "^2.0.20",
     "puppeteer": "^3.0.2"
   }
 }
